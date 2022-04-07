@@ -1,0 +1,7 @@
+﻿@model GodisListViewModel
+
+    <h1>@Model.CurrentCategory</h1>
+    @foreach (var godis in Model.Godisar)
+            {
+               <partial name="_candyCard" model="godis" />
+            }

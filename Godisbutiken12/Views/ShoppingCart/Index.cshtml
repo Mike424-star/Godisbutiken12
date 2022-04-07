@@ -1,0 +1,37 @@
+﻿@model ShoppingCartViewModel
+
+<h2>Shopping Cart: All godis som du älskar! </h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Antal</th>
+            <th>Godis</th>
+            <th class="text-right">Pris</th>
+            <th class="text-right">Delsumma</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ShoppingCart.shoppingCartItems)
+        {
+            <tr>
+                <td class="text-left"><a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-godisId="@item.Godis.GodisID" alt="">Ta bort en</a></td>
+                <td class="text-center">@item.Amount</td>
+                <td class="text-left">@item.Godis.Name</td>
+                <td class="text-right">@item.Godis.Price.ToString("c")</td>
+                <td class="text-right">@((item.Amount * item.Godis.Price).ToString("c"))</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-right">Total</td>
+            <td class="text-right"> @Model.ShoppingCartTotal.ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="ClearCart">Clear Cart</a>
+    <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Checkout</a>
+</div>
